@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fa">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tar & Tombak</title>
+
+    <!-- Classic favicon -->
+    <link rel="icon" href="./favicon/favicon.ico">
+
+    <!-- PNG favicons -->
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+
+    <!-- iOS -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+
+    <!-- Android / PWA -->
+    <link rel="manifest" href="./favicon/site.webmanifest">
+
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: radial-gradient(circle at top, #0b3a44, #001f26);
+            color: #f5d77a;
+            font-family: system-ui, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .hint {
+            font-size: 0.9rem;
+            opacity: 0.7;
+            margin-bottom: 24px;
+        }
+
+        .playlist {
+            width: 90%;
+            max-width: 420px;
+        }
+
+        .track {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 18px;
+            margin-bottom: 12px;
+            border-radius: 14px;
+            background: rgba(255, 226, 122, 0.08);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .track:hover {
+            background: rgba(255, 226, 122, 0.18);
+        }
+
+        .track.active {
+            background: rgba(255, 215, 0, 0.28);
+            box-shadow: 0 0 18px rgba(255, 215, 0, 0.35);
+        }
+
+        .track span {
+            font-size: 0.95rem;
+        }
+
+        .play-icon {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+
+        audio {
+            width: 90%;
+            max-width: 420px;
+            margin-top: 28px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Tar & Tombak</h1>
+    <div class="hint">Tap a piece to listen</div>
+
+    <div class="playlist">
+        <div class="track" data-src="./audio/chaharmozrab-mahur-darvish-khan.mp3">
+            <span>Chaharmozrab Mahur</span>
+            <span class="play-icon">▶</span>
+        </div>
+
+        <div class="track" data-src="./audio/chaharmezrab-dashti-shahnaz.mp3">
+            <span>Chaharmozrab Dashti</span>
+            <span class="play-icon">▶</span>
+        </div>
+    </div>
+
+    <audio id="player" controls preload="none"></audio>
+
+    <script>
+        const player = document.getElementById('player');
+        const tracks = document.querySelectorAll('.track');
+
+        tracks.forEach(track => {
+            track.addEventListener('click', () => {
+                tracks.forEach(t => t.classList.remove('active'));
+                track.classList.add('active');
+                player.src = track.dataset.src;
+                player.play();
+            });
+        });
+    </script>
+
+</body>
+
+</html>
